@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SIMULATION — Job Application (Training Demo)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+    }
+    header {
+      background:#fee;
+      border-left:6px solid #f44;
+      padding:10px;
+      margin-bottom:16px;
+      border-radius:6px;
+      font-size: 0.9rem;
+      text-align:center;
+    }
+    .card {
+      background: #fff;
+      border:1px solid #ddd;
+      padding:20px;
+      border-radius:10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align:center;
+      margin-bottom:15px;
+      color: #333;
+    }
+    label {
+      display:block;
+      margin-top:12px;
+      font-weight: 600;
+      color:#444;
+    }
+    input[type="text"], input[type="email"] {
+      width:100%;
+      padding:10px;
+      margin-top:6px;
+      box-sizing:border-box;
+      border:1px solid #ccc;
+      border-radius:6px;
+      transition: border 0.2s;
+    }
+    input:focus {
+      border-color:#007bff;
+      outline:none;
+    }
+    button {
+      margin-top:16px;
+      padding:12px;
+      width:100%;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:bold;
+      background: #007bff;
+      color: #fff;
+      transition: background 0.3s, transform 0.1s;
+    }
+    button:hover {
+      background:#0056b3;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .success {
+      background:#e8f5e9;
+      padding:12px;
+      margin-top:15px;
+      border-radius:6px;
+      border-left:5px solid #4caf50;
+      font-size:0.95rem;
+    }
+    small { color:#555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <strong>TRAINING DEMO — DO NOT ENTER REAL CREDENTIALS</strong><br>
+      This page is a <em>simulated</em> phishing landing page for classroom training. It does not send data anywhere.
+    </header>
+
+    <main class="card">
+      <h2>Job Application</h2>
+      <p><small>Note: this is a <strong>classroom training demo</strong>. Enter fictional info only.</small></p>
+
+      <form id="demoForm" autocomplete="off">
+        <label>
+          Full name
+          <input id="name" type="text" placeholder="Enter full name" required>
+        </label>
+
+        <label>
+          Email address
+          <input id="email" type="email" placeholder="Enter your email (fake/test email)" required>
+        </label>
+
+        <button id="submitBtn" type="submit">Submit Application</button>
+      </form>
+
+      <div id="result" style="display:none" class="success"></div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('demoForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      console.log('SIMULATION SUBMISSION:', { name, email, timestamp: new Date().toISOString() });
+
+      const result = document.getElementById('result');
+      result.style.display = 'block';
+      result.innerHTML = '<strong>Thank you — training demo received.</strong><br>' +
+                         'Submitted Name: <em>' + escapeHtml(name) + '</em><br>' +
+                         'Submitted Email: <em>' + escapeHtml(email) + '</em><br>' +
+                         '<p style="margin-top:8px"><small>This data did not leave your browser. Use fictional/test addresses.</small></p>';
+      document.getElementById('demoForm').reset();
+    });
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, function(m){ 
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+      });
+    }
+  </script>
+</body>
+</html>
